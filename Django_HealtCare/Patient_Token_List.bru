@@ -1,0 +1,38 @@
+meta {
+  name: Patient_Token_List
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8000/api/auth/login/
+  body: json
+}
+
+body:json {
+  {
+    "email": "patient@example.com",
+    "password": "your_password"
+  }
+}
+
+doc {
+  name: Get Patient Access Token
+  desc: |
+    This request allows you to obtain an access token for a patient account.
+    The response will include:
+    - access token
+    - refresh token
+    - user details
+
+    Example response:
+    {
+      "user": {
+        "id": 1,
+        "email": "patient@example.com",
+        ...
+      },
+      "refresh": "eyJ0eXAiOiJKV1QiLCJhbGc...",
+      "access": "eyJ0eXAiOiJKV1QiLCJhbGc..."
+    }
+}

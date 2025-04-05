@@ -1,0 +1,34 @@
+meta {
+  name: Patient_Profile
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:8000/api/patients/
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  # First obtain this token by logging in at /api/auth/login/ with your credentials
+  token: {{access_token}}
+}
+
+body:json {
+  {
+    "user": {
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "patient@example.com",
+      "phone_number": "+1234567890",
+      "address": "123 Test St",
+      "date_of_birth": "1990-01-01"
+    },
+    "blood_group": "A+",
+    "allergies": "None",
+    "medical_conditions": "None",
+    "emergency_contact_name": "Emergency Contact",
+    "emergency_contact_number": "9876543210"
+  }
+}

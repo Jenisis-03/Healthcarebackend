@@ -1,0 +1,26 @@
+meta {
+  name: Registration_Doctor
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8000/api/auth/register/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username": "dr.smith",
+    "password": "securepass123",
+    "confirm_password": "securepass123",
+    "email": "dr.smith@example.com",
+    "first_name": "John",
+    "last_name": "Smith",
+    "phone_number": "+1234567890",
+    "address": "123 Medical Center Dr, City, State 12345",
+    "date_of_birth": "1980-01-01",
+    "user_type": "DOCTOR"
+  }
+}

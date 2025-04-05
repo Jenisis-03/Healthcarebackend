@@ -1,0 +1,18 @@
+meta {
+  name: User_Login
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8000/api/auth/login/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username": "testpatient1",
+    "password": "securepass1234"
+  }
+}

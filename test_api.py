@@ -23,7 +23,7 @@ def test_auth_endpoints():
     print(f'Status Code: {response.status_code}')
     print(f'Response: {json.dumps(response.json(), indent=2)}')
     
-    # Test doctor registration
+    # Test doctor registration (Step 1: Create user account)
     doctor_register_data = {
         'username': 'testdoctor',
         'password': 'test123',
@@ -37,8 +37,37 @@ def test_auth_endpoints():
         'user_type': 'DOCTOR'
     }
     
-    print('\n2. Testing Doctor Registration:')
+    print('\n2. Testing Doctor Registration (Step 1 - User Account):')
     response = requests.post(f'{BASE_URL}/auth/register/', json=doctor_register_data)
+    print(f'Status Code: {response.status_code}')
+    print(f'Response: {json.dumps(response.json(), indent=2)}')
+    
+    # Login as doctor to get token for profile creation
+    doctor_login_data = {
+        'username': 'testdoctor',
+        'password': 'test123'
+    }
+    
+    print('\n2.1. Getting Doctor Token for Profile Creation:')
+    response = requests.post(f'{BASE_URL}/auth/login/', json=doctor_login_data)
+    print(f'Status Code: {response.status_code}')
+    print(f'Response: {json.dumps(response.json(), indent=2)}')
+    doctor_setup_token = response.json().get('access')
+    
+    # Step 2: Create doctor profile
+    headers = {'Authorization': f'Bearer {doctor_setup_token}'}
+    doctor_profile_data = {
+        'specialization': 'Cardiology',
+        'license_number': 'DOC123',
+        'experience_years': 5,
+        'consultation_fee': 100.00,
+        'available_days': 'Monday,Tuesday,Wednesday',
+        'available_time_start': '09:00:00',
+        'available_time_end': '17:00:00'
+    }
+    
+    print('\n2.2. Testing Doctor Registration (Step 2 - Profile Creation):')
+    response = requests.post(f'{BASE_URL}/doctors/', json=doctor_profile_data, headers=headers)
     print(f'Status Code: {response.status_code}')
     print(f'Response: {json.dumps(response.json(), indent=2)}')
     

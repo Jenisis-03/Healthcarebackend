@@ -1,0 +1,35 @@
+meta {
+  name: Doctor_Profile
+  type: http
+  seq: 8
+}
+
+post {
+  url: http://localhost:8000/api/doctors/
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: <your_access_token>
+}
+
+body:json {
+  {
+    "user": {
+      "first_name": "John",
+      "last_name": "Smith",
+      "email": "dr.smith@example.com",
+      "phone_number": "+1234567890",
+      "address": "123 Medical Center Dr",
+      "date_of_birth": "1980-01-01"
+    },
+    "specialization_id": 1,
+    "license_number": "MED123456",
+    "experience_years": 10,
+    "consultation_fee": 150.00,
+    "available_days": "Monday, Wednesday, Friday",
+    "available_time_start": "09:00:00",
+    "available_time_end": "17:00:00"
+  }
+}

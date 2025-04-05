@@ -1,0 +1,26 @@
+meta {
+  name: Registration_Patient
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8000/api/auth/register/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username": "testpatient1",
+    "password": "securepass1234",
+    "confirm_password": "securepass1234",
+    "email": "patient1@example.com",
+    "first_name": "Grey",
+    "last_name": "Webber",
+    "phone_number": "+1234567890",
+    "address": "123 Test St",
+    "date_of_birth": "1990-01-01",
+    "user_type": "PATIENT"
+  }
+}

@@ -29,15 +29,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         if user.user_type == 'PATIENT':
             Patient.objects.create(user=user)
         elif user.user_type == 'DOCTOR':
-            Doctor.objects.create(
-                user=user,
-                specialization_id=1,  # Default specialization, should be updated later
-                license_number='TBD',
-                experience_years=0,
-                consultation_fee=0.00,
-                available_days='Monday,Tuesday,Wednesday,Thursday,Friday',
-                available_time_start='09:00:00',
-                available_time_end='17:00:00'
+            raise serializers.ValidationError(
+                "Doctor registration requires additional profile information. "
+                "Please use the doctor profile endpoint to complete registration."
             )
 
         return user
